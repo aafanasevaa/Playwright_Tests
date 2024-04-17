@@ -38,5 +38,5 @@ export class BooksPage extends HelperBase {
     async clickOnTheItemCard(parameter: string) {
         await this.itemCard.getByRole('link', { name: parameter, exact: true }).click();
         await expect(this.page.locator('.current-item')).toHaveText(parameter);
-    };
+    }
 }

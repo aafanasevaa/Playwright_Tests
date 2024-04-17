@@ -1,10 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
+require('dotenv').config();
 
 export default defineConfig({
   testDir: './tests/',
@@ -32,8 +29,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-
-   /* {
+    {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -41,6 +37,6 @@ export default defineConfig({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
-    }, */
+    },
   ],
 });

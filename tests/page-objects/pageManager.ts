@@ -1,4 +1,4 @@
-import {Page} from "@playwright/test";
+import {Locator, Page} from "@playwright/test";
 import {MainPage} from "./mainPage";
 import {CellPhonesPage} from "./cellPhonesPage";
 import {PhoneCoverPage} from "./phoneCoverPage";
@@ -6,6 +6,9 @@ import {ShoppingCartPage} from "./shoppingCartPage";
 import {BooksPage} from "./booksPage";
 import {HealthBookPage} from "./healthBookPage";
 import {WishlistPage} from "./wishlistPage";
+import {SearchResultsPage} from "./searchResultsPage";
+import {LogInPage} from "./logInPage";
+import {RegisterPage} from "./registerPage";
 
 export class PageManager {
 
@@ -17,6 +20,9 @@ export class PageManager {
     private readonly booksPage: BooksPage;
     private readonly healthBookPage: HealthBookPage;
     private readonly wishlistPage: WishlistPage;
+    private readonly searchResultsPage: SearchResultsPage;
+    private readonly loginPage: LogInPage;
+    private readonly registerPage: RegisterPage;
 
     constructor(page: Page) {
         this.page = page;
@@ -27,7 +33,10 @@ export class PageManager {
         this.booksPage = new BooksPage(this.page);
         this.healthBookPage = new HealthBookPage(this.page);
         this.wishlistPage = new WishlistPage(this.page);
-    }
+        this.searchResultsPage = new SearchResultsPage(this.page);
+        this.loginPage = new LogInPage(this.page);
+        this.registerPage = new RegisterPage(this.page);
+    };
 
     onMainPage() {
         return this.mainPage;
@@ -56,4 +65,16 @@ export class PageManager {
     onWishlistPage() {
         return this.wishlistPage;
     };
+
+    onSearchResultsPage() {
+        return this.searchResultsPage;
+    };
+
+    onLoginPage() {
+        return this.loginPage;
+    };
+
+    onRegisterPage() {
+        return this.registerPage;
+    }
 }
