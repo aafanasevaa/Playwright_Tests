@@ -12,6 +12,11 @@ README.md: You're reading it right now! It's where I am explaining what this pro
 
 ***
 
+> [!IMPORTANT]
+> Currently tests are set up to be run on chromium only due to flakiness and instability of the website
+
+***
+
 ### 🐾 Getting Started
 
 `git clone` https://github.com/your-username/awesome-project-name.git - make sure you clone the repo  
