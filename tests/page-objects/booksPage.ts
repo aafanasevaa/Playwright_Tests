@@ -1,10 +1,11 @@
 import {expect, Locator, Page} from '@playwright/test';
 import {HelperBase} from "./helperBase";
 
-export class CellPhonesPage extends HelperBase {
+export class BooksPage extends HelperBase {
     readonly sortByDropdownFilter: Locator;
     readonly productPageSizeDropdownFilter: Locator;
     readonly viewModeDropdownFilter: Locator;
+    readonly priceFilter: Locator;
     readonly breadcrumbsHeader: Locator;
     readonly itemCard: Locator;
 
@@ -13,21 +14,25 @@ export class CellPhonesPage extends HelperBase {
         this.sortByDropdownFilter = page.getByTestId('products-orderby');
         this.productPageSizeDropdownFilter = page.getByTestId('products-pagesize');
         this.viewModeDropdownFilter = page.getByTestId('products-viewmode');
+        this.priceFilter = page.locator('.product-filters');
         this.breadcrumbsHeader = page.locator('//*[@class=\'breadcrumb\']');
         this.itemCard = page.locator('.item-box');
     };
 
     async checkTheDisplayOfPageElements() {
-        await expect(this.page).toHaveURL('/cell-phones');
+        await expect(this.page).toHaveURL('/books');
         await expect(this.sortByDropdownFilter).toBeVisible();
         await expect(this.productPageSizeDropdownFilter).toBeVisible();
         await expect(this.viewModeDropdownFilter).toBeVisible();
-        //header assert
+        await expect(this.priceFilter).toBeVisible();
+        let priceValues = "Filter by price Under 25.00 25.00 - 50.00 Over 50.00";
+        expect(String(await this.priceFilter.allInnerTexts()).replace(/(\r\n|\n|\r)/gm, " "))
+            .toEqual(priceValues);
+         //header assert
         await expect(this.breadcrumbsHeader).toBeVisible();
         await expect(this.breadcrumbsHeader.getByTitle('Home')).toBeVisible();
-        await expect(this.breadcrumbsHeader.getByTitle('Electronics')).toBeVisible();
-        await expect(this.breadcrumbsHeader.getByText('Cell phones')).toBeVisible();
-        expect(await this.itemCard.all()).toHaveLength(3);
+        await expect(this.breadcrumbsHeader.getByText('Books')).toBeVisible();
+        expect(await this.itemCard.all()).toHaveLength(6);
     };
 
     async clickOnTheItemCard(parameter: string) {
